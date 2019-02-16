@@ -12,8 +12,8 @@ public class Temperature {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Double temperature;
-    private Date createDate;
-    private Date updateDate;
+    private Date create_date;
+    private Date update_date;
 
     public Temperature(){
 
@@ -22,8 +22,8 @@ public class Temperature {
     public Temperature(Integer id, Double temperature, Date createDate, Date updateDate){
         this.id = id;
         this.temperature = temperature;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
+        this.create_date = createDate;
+        this.update_date = updateDate;
     }
 
     public Integer getId(){
@@ -35,11 +35,11 @@ public class Temperature {
     }
 
     public Date getCreateDate(){
-        return this.createDate;
+        return this.create_date;
     }
 
     public Date getUpdateDate(){
-        return this.updateDate;
+        return this.update_date;
     }
 
     public void setId(Integer id){
@@ -51,10 +51,10 @@ public class Temperature {
     }
 
     public void setCreateDate(Date createDate){
-        this.createDate = createDate;
+        this.create_date = createDate;
     }
 
     public void setUpdateDate(Date updateDate){
-
+        this.update_date = updateDate;
     }
 }
