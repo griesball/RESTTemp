@@ -1,60 +1,68 @@
 package com.temperatures.model;
 
-import java.sql.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
+@Table(name = "temperature")
 public class Temperature {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private Double temperature;
-    private Date create_date;
-    private Date update_date;
+    @Column(name = "temperature", nullable = false)
+    private Double celsius;
+    @Transient
+    private Double fahrenheit;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "create_date", nullable = false,updatable = false)
+    private Date createDate;
+    @Temporal(TemporalType.DATE)
+    @Column(name="update_date", nullable = false)
+    private Date updateDate;
 
-    public Temperature(){
-
-    }
-
-    public Temperature(Integer id, Double temperature, Date createDate, Date updateDate){
+    public Temperature(Integer id, Double temperature){
         this.id = id;
-        this.temperature = temperature;
-        this.create_date = createDate;
-        this.update_date = updateDate;
+        this.celsius = temperature;
+        this.fahrenheit = (temperature * 9/5) + 32;
     }
 
     public Integer getId(){
         return this.id;
     }
 
-    public Double getTemperature(){
-        return this.temperature;
+    public Double getCelsius(){
+        return this.celsius;
+    }
+
+    public Double getFahrenheit(){
+        return this.fahrenheit;
     }
 
     public Date getCreateDate(){
-        return this.create_date;
+        return this.createDate;
     }
 
     public Date getUpdateDate(){
-        return this.update_date;
+        return this.updateDate;
     }
 
-    public void setId(Integer id){
-        this.id = id;
+    public void setCelsius(Double temperature){
+        this.celsius = temperature;
     }
 
-    public void setTemperature(Double temperature){
-        this.temperature = temperature;
+    @PrePersist
+    protected void onCreate(){
+        updateDate=createDate=new Date();
     }
 
-    public void setCreateDate(Date createDate){
-        this.create_date = createDate;
+    @PreUpdate
+    protected void onUpdate(){
+        updateDate=new Date();
     }
 
-    public void setUpdateDate(Date updateDate){
-        this.update_date = updateDate;
+    @PostLoad
+    protected void onLoad(){
+        this.fahrenheit = (this.celsius * 9/5) + 32;
     }
+
 }
