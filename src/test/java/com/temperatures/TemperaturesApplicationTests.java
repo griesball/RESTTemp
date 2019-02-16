@@ -1,4 +1,4 @@
-package com.temperatures.temperatures;
+package com.temperatures;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

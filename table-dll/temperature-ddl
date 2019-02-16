@@ -1,0 +1,6 @@
+create database temperature;
+create table temperature.temperature (id integer,temperature double,create_date date,update_date date);
+create user 'RESTTempConnect'@'%' identified by 'testpassword';
+GRANT SELECT,INSERT,UPDATE,DELETE
+	ON temperature.*
+    TO 'RESTTempConnect'@'%';
