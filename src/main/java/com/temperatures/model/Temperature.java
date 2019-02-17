@@ -19,9 +19,19 @@ public class Temperature {
     @Temporal(TemporalType.DATE)
     @Column(name="update_date", nullable = false)
     private Date updateDate;
+    
+    public Temperature(){
 
-    public Temperature(Integer id, Double temperature){
+    }
+
+    public Temperature(Integer id, Double celsius, Date createDate, Date updateDate){
         this.id = id;
+        this.celsius = celsius;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
+
+    public Temperature(Double temperature){
         this.celsius = temperature;
         this.fahrenheit = (temperature * 9/5) + 32;
     }

@@ -3,39 +3,54 @@ package com.temperatures.controller;
 import com.temperatures.model.Temperature;
 import com.temperatures.service.TemperatureService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(path = "/temp")
 public class TemperatureController {
 
-    @Autowired
-    TemperatureService tempService;
+    private TemperatureService tempService = new TemperatureService();
 
     @GetMapping()
     public @ResponseBody List<Temperature> getTemps(){
-        //TODO
-        return new ArrayList<>();
+        return tempService.getTemps();
     }
 
     @PostMapping()
-    public @ResponseBody List<Temperature> postTemp(){
-        //TODO
-        return new ArrayList<>();
+    public Object postTemp(@RequestBody HashMap<String,Object> testObject){
+        try {
+            Integer id = Integer.parseInt(testObject.get("id").toString());
+            Double newTemp = Double.parseDouble(testObject.get("temperature").toString());
+            tempService.postTemp(id, newTemp);
+        }catch(Exception e){
+            return e.toString();
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping()
-    public void putTemp(){
-        //TODO
+    @PutMapping("/{temp}/")
+    public Object putTemp(@PathVariable Double temp){
+        try {
+            tempService.putTemp(temp);
+        }catch(Exception e){
+            return e.toString();
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTemp(@PathVariable Integer id){
-        //TODO
+    public Object deleteTemp(@PathVariable Integer id){
+        try{
+            tempService.deleteTemp(id);
+        }catch(Exception e){
+            return e.toString();
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

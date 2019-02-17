@@ -15,22 +15,24 @@ public class TemperatureService {
     private TemperatureRepository tempRepo;
 
     public List<Temperature> getTemps(){
-
-        //TODO
-        return new ArrayList<>();
+        Iterable<Temperature> source = tempRepo.findAll();
+        List<Temperature> target = new ArrayList<>();
+        source.forEach(target::add);
+        return target;
     }
 
-    public List<Temperature> postTemp(){
-
-        //TODO
-        return new ArrayList<>();
+    public void postTemp(Integer id, Double newTemp){
+        Temperature oldTemp = tempRepo.findOne(id);
+        oldTemp.setCelsius(newTemp);
+        tempRepo.save(oldTemp);
     }
 
-    public void putTemp(){
-        //TODO
+    public void putTemp(Double temp){
+        Temperature newTemp = new Temperature(temp);
+        tempRepo.save(newTemp);
     }
 
-    public void deleteTemp(){
-        //TODO
+    public void deleteTemp(Integer id){
+        tempRepo.delete(id);
     }
 }
