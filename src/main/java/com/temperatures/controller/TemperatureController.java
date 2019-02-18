@@ -1,14 +1,12 @@
 package com.temperatures.controller;
 
-import com.temperatures.model.Temperature;
 import com.temperatures.service.TemperatureService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
+
 
 @RestController
 @RequestMapping(path = "/temp")
@@ -17,8 +15,13 @@ public class TemperatureController {
     private TemperatureService tempService = new TemperatureService();
 
     @GetMapping()
-    public @ResponseBody List<Temperature> getTemps(){
-        return tempService.getTemps();
+    public Object getTemps(){
+        try {
+            return tempService.getTemps();
+        }
+        catch(Exception e){
+            return e.toString();
+        }
     }
 
     @PostMapping()
@@ -30,7 +33,7 @@ public class TemperatureController {
         }catch(Exception e){
             return e.toString();
         }
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/{temp}/")
