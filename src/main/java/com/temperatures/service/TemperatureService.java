@@ -21,6 +21,10 @@ public class TemperatureService {
         return target;
     }
 
+    public Temperature getTemp(Integer id){
+        return tempRepo.findOne(id);
+    }
+
     public void postTemp(Integer id, Double newTemp){
         Temperature oldTemp = tempRepo.findOne(id);
         oldTemp.setCelsius(newTemp);
