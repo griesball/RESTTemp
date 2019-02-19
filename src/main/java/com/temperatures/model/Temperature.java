@@ -75,4 +75,13 @@ public class Temperature {
         this.fahrenheit = (this.celsius * 9/5) + 32;
     }
 
+    public String toString() {
+        return "{ id:" + this.id + ", celsius: "  + this.celsius + ", fahrenheit:" + this.fahrenheit + ", createDate:" + this.createDate + ",this.updateDate:" + this.updateDate + "}";
+    }
+
+    //For testing purposes we will ignore the dates for creation and update
+    public String toStringNoDateNoId(){
+        return "{celsius: "  + this.celsius + ", fahrenheit:" + this.fahrenheit + "}";
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.temperatures.controller;
 
 import com.temperatures.service.TemperatureService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,8 @@ import java.util.HashMap;
 @RequestMapping(path = "/temp")
 public class TemperatureController {
 
-    private TemperatureService tempService = new TemperatureService();
+    @Autowired
+    private TemperatureService tempService;
 
     /**
      * Rest Controller get request

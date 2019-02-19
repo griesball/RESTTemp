@@ -39,4 +39,8 @@ public class TemperatureService {
     public void deleteTemp(Integer id){
         tempRepo.delete(id);
     }
+
+    public void deleteAll(){
+        tempRepo.deleteAll();
+    }
 }

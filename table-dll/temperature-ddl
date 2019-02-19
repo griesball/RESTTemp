@@ -1,6 +1,14 @@
 create database temperature;
-create table temperature.temperature (id integer,temperature double,create_date date,update_date date);
+CREATE TABLE `temperature` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `temperature` double NOT NULL,
+  `create_date` date NOT NULL,
+  `update_date` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 create user 'RESTTempConnect'@'%' identified by 'testpassword';
 GRANT SELECT,INSERT,UPDATE,DELETE
 	ON temperature.*
     TO 'RESTTempConnect'@'%';
+
+
